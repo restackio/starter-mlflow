@@ -9,7 +9,7 @@ WORKDIR /mlflow/
 COPY requirements.txt .
 
 # Install a specific version of NumPy that is compatible with your MLflow version
-RUN pip install --no-cache-dir --upgrade numpy
+RUN pip install --no-cache-dir numpy==1.19.5
 
 # Downgrade protobuf to a potentially compatible version (adjust the version as needed)
 RUN pip install --no-cache-dir protobuf==3.20.0
