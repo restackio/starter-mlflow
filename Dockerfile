@@ -1,19 +1,27 @@
 # Use an appropriate base image for MLflow
 FROM burakince/mlflow:latest
 
-# Set the working directory to /mlflow/
-WORKDIR /home/mlflow
+LABEL maintainer="Alexander Thamm GmbH <contact@alexanderthamm.com>"
+
+WORKDIR /mlflow/
 
 # Copy your application code and requirements
 COPY requirements.txt .
-# Install or upgrade protobuf to a compatible version (adjust the version as needed)
-RUN pip install --no-cache-dir protobuf==3.20.0
-# Install Python packages from requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 
+# Install a specific version of NumPy that is compatible with your MLflow version
+RUN pip install --no-cache-dir --upgrade numpy
+
+# Downgrade protobuf to a potentially compatible version (adjust the version as needed)
+RUN pip install --no-cache-dir protobuf==3.20.0
+
+# Install the remaining requirements
+RUN pip install --no-cache-dir -r requirements.txt \
+  && rm requirements.txt
+
 EXPOSE 5000
 
-# Command to start MLflow with custom parameters
-CMD ["mlflow", "server"]
+ENV BACKEND_URI sqlite:////mlflow/mlflow.db
+ENV ARTIFACT_ROOT /mlflow/artifacts
+
+CMD mlflow server --backend-store-uri ${BACKEND_URI} --default-artifact-root ${ARTIFACT_ROOT} --host 0.0.0.0 --port 5000
 
