@@ -14,10 +14,6 @@ RUN pip install --no-cache-dir numpy==1.19.5
 # Downgrade protobuf to a potentially compatible version (adjust the version as needed)
 RUN pip install --no-cache-dir protobuf==3.20.0
 
-# Install the remaining requirements
-RUN pip install --no-cache-dir -r requirements.txt \
-  && rm requirements.txt
-
 EXPOSE 5000
 
 ENV BACKEND_URI sqlite:////mlflow/mlflow.db
