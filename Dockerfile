@@ -3,9 +3,6 @@ FROM burakince/mlflow:latest
 # Set the working directory to /mlflow/
 WORKDIR /mlflow/
 
-# Copy your application code and requirements
-COPY requirements.txt .
-
 # Install a specific version of NumPy that is compatible with your MLflow version
 RUN pip install --no-cache-dir numpy==1.19.5
 
