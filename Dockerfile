@@ -1,10 +1,10 @@
 # Use an appropriate base image for MLflow
-FROM burakince/mlflow:latest
+FROM ghcr.io/mlflow/mlflow:latest
 # Set the working directory to /mlflow/
 WORKDIR /mlflow/
 
 # Install a specific version of NumPy that is compatible with your MLflow version
-RUN pip install --no-cache-dir numpy==1.19.5
+RUN pip install --no-cache-dir numpy
 
 # Downgrade protobuf to a potentially compatible version (adjust the version as needed)
 RUN pip install --no-cache-dir protobuf==3.20.0
