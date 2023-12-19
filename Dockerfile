@@ -5,6 +5,8 @@ WORKDIR /mlflow/
 
 # Install a specific version of NumPy that is compatible with your MLflow version
 RUN pip install --no-cache-dir numpy
+# Install psycopg2
+RUN pip install psycopg2-binary
 
 # Downgrade protobuf to a potentially compatible version (adjust the version as needed)
 RUN pip install --no-cache-dir protobuf==3.20.0
