@@ -1,5 +1,5 @@
 # Use an appropriate base image for MLflow
-FROM ghcr.io/mlflow/mlflow:latest
+FROM bitnami/mlflow:2.9.2-debian-11-r0
 # Set the working directory to /mlflow/
 WORKDIR /mlflow/
 
